@@ -1,0 +1,25 @@
+$color_1: #cacaca;
+
+.nav-link.disabled {
+	color: $color_1;
+}
+.navbar-light {
+	.navbar-nav {
+		.active {
+			>.nav-link {
+				font-weight: bold;
+			}
+		}
+		.nav-link.active {
+			font-weight: bold;
+		}
+		.nav-link.show {
+			font-weight: bold;
+		}
+		.show {
+			>.nav-link {
+				font-weight: bold;
+			}
+		}
+	}
+}

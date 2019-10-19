@@ -1,0 +1,45 @@
+extends template
+
+append styles
+    // Custom styles for this template
+    //link(href='../css/theme.css' rel='stylesheet')
+block nav
+  - var active = "home"
+
+block content
+    .container.theme-showcase(role='main')
+
+        .py-5.text-center
+            //-img.d-block.mx-auto.mb-4(src='/images/logo_a.png' alt='' width='72' height='72')
+            h2 Home
+            p.lead
+                |Permissões de usuário e configurações de acesso são especificadas em perfis e conjuntos de permissões. Para usá-los efetivamente, entenda as diferenças entre os perfis e conjuntos de permissões.
+        .row
+            .col-md-12.order-md-1
+                form(method="POST" action="/user")
+                    #error
+                        if error
+                            p.text-danger #{errorMsg}
+                    - var h1Classes = ['h3', 'mb-3', 'font-weight-normal']
+                    h1(class=h1Classes) Alteração de perfil
+
+                    .row
+                        .col-md-6.mb-3
+                            //- input Usuário 
+                            label(for="inputUser") Usuário
+                            select(id="inputUser" class="form-control top-item" required autofocus)
+                                each user in users
+                                    option(value=user.id) #{user.name}
+                        .col-md-6.mb-3
+                            //- input Perfil 
+                            label(for="inputProfile") Perfil
+                            select(id="inputProfile" class="form-control bottom-item" required autofocus)
+                                each profile in profiles
+                                    option(value=profile.id) #{profile.name}
+                    
+                    .mb-3
+                        //- signIn button
+                        - var buttonClass=['btn', 'btn-lg', 'btn-primary', 'btn-block'];
+                        button(class=buttonClass type="submit") Atualizar
+                    - var pClasses=['mt-5', 'mb-3', 'text-muted'];
+                    p(class=pClasses) © 2019

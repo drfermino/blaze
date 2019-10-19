@@ -1,0 +1,11 @@
+extends _bootstrap
+
+block body
+    block nav
+        - var active = "home"
+
+    if session.user
+        include navbar.pug
+        +navbar(active)
+
+    block content

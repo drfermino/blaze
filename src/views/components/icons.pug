@@ -1,0 +1,9 @@
+//- Glyphicon
+mixin icon-g(name)
+	span.glyphicon(class=`glyphicon-${name}`,aria-hidden="true")
+	
+//- Awesome
+mixin icon(name)
+	a(href='#')
+		span(id=`${attributes.id}`,class='icon-wrapper',style=`font-size: ${attributes.size}; color: ${attributes.color};`)
+			i.fas(class=`fa-${name}`)
