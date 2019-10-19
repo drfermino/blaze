@@ -39,7 +39,7 @@ router.get('/', isAuthenticated, function(req, res, next) {
 
 router.get('/user', isAuthenticated, async function (req, res, next) {
   let roles = await sfUser.listRoles(conn);
-  let rolesRes = [{id: '1', name: 'Diego'}, {id: '2', name: 'João'}];
+  let rolesRes;
 
   roles.forEach(function(role){
     rolesRes.push({id: role.Id, name: role.Name})
