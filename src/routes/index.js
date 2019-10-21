@@ -2,8 +2,8 @@ import express from 'express';
 var router = express.Router();
 import sfLogin from '../controllers/authenticate/sfLogin';
 import sfUser from '../controllers/salesforce/sfUser';
+import sfMetadata from '../controllers/salesforce/sfMetadata';
 import jsforce from 'jsforce';
-import prettyHtml  from 'json-pretty-html';
 
 
 const oauth2 = new jsforce.OAuth2({
@@ -88,15 +88,23 @@ router.get('/metadata', (req, res, next) => {
 
 router.get('/metadata/describe', isAuthenticated, async (req, res, next) => {
   if (!sess.metadata) {
-    sess.metadata = [];
-    await conn.metadata.describe('46.0', function(err, metadata) {
-      if (err) { return console.error('err', err); }
-      metadata.metadataObjects.forEach(function(item){
-        sess.metadata.push({name: item.xmlName});
-      });  
-    });
+    sess.metadata = await sfMetadata.describeMetadata(conn);
   }
-  res.render('metadata', {html: JSON.stringify(sess.metadata, undefined, 2), metaList: sess.metadata});
+  res.render('metadata', {html: JSON.stringify(sess.metadata, undefined, 2), metaList: sess.metadata.metadataObjects});
+});
+
+router.get('/metadata/describe/:mdt', isAuthenticated, async (req, res, next) => {
+  const meta = req.params.mdt;
+  if (!sess.metadata[meta]) {
+    sess.metadata[meta] = await sfMetadata.listMetadata(conn, req.params.mdt);
+  }
+
+  res.json({  
+    success: true,
+    html: JSON.stringify(sess.metadata[meta], undefined, 2)
+  });
+
+ //res.render('metadata', {html: JSON.stringify(sess.metadata[meta], undefined, 2), metaList: sess.metadata.metadataObjects});
 });
 
 /* GET login page. */
