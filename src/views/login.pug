@@ -1,7 +1,7 @@
 extends template
 
 block content
-    div.text-center.sign-in
+    .text-center.sign-in
         form(class="form-signin" method="POST" action="/login")
             #error
                 if error
@@ -13,10 +13,10 @@ block content
                     h1(class=h1Classes) Login
                     //- input email 
                     label( for="inputEmail" class="sr-only") Usuário
-                    input(type="email" name="username" id="inputEmail" class="form-control" placeholder="Usuário" required autofocus)
+                    input(type="email" name="username" value="diego_fermino@terceiros.sicredi.com.br.dev" id="inputEmail" class="form-control" placeholder="Usuário" required autofocus)
                     //- input password
                     label(for="inputPassword" class="sr-only") Senha
-                    input(type="password" name="password" id="inputPassword" class="form-control" placeholder="Senha" required)
+                    input(type="password" name="password"  value="debora!23" id="inputPassword" class="form-control" placeholder="Senha" required)
                     //- remember Checkbox
                     - var divClasses=['checkbox', 'mb-3'];
                     div(class=divClasses)

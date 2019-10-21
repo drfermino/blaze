@@ -13,12 +13,12 @@ mixin navbar(active)
                         | Home 
                         span.sr-only (current)
                 li.nav-item(class=active === "checkout" ? "active" : "")
-                    a.nav-link(href='/checkout')  Checkout
+                    a.nav-link(href='/metadata/describe')  Metadata
                 li.nav-item.dropdown(class=active === "user" ? "active" : "")
                     a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
                         | Usuário
                     .dropdown-menu(aria-labelledby='navbarDropdown')
-                        a.dropdown-item(href='/user') Trocar papel
+                        a.dropdown-item(href='/users') Trocar papel
                         //-a.dropdown-item(href='#') Another action
                         //-.dropdown-divider
                         //-a.dropdown-item(href='#') Something else here

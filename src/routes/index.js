@@ -1,8 +1,10 @@
 import express from 'express';
 var router = express.Router();
 import sfLogin from '../controllers/authenticate/sfLogin';
-import sfUser from '../controllers/salesforce/user';
+import sfUser from '../controllers/salesforce/sfUser';
 import jsforce from 'jsforce';
+import prettyHtml  from 'json-pretty-html';
+
 
 const oauth2 = new jsforce.OAuth2({
   loginUrl : 'https://test.salesforce.com',
@@ -29,7 +31,6 @@ function isAuthenticated(req, res, next) {
   res.redirect('/login');
 }
 
-
 /* GET home page. */
 router.get('/', isAuthenticated, function(req, res, next) {
     res.render('index', { 
@@ -37,24 +38,40 @@ router.get('/', isAuthenticated, function(req, res, next) {
       profiles: [{id: '1', name: 'Atendente'}, {id: '2', name: 'Gerente'}] });
 });
 
-router.get('/user', isAuthenticated, async function (req, res, next) {
-  let roles = await sfUser.listRoles(conn);
-  let rolesRes;
-
-  roles.forEach(function(role){
-    rolesRes.push({id: role.Id, name: role.Name})
-  });
-
-  res.render('user', { 
-    roles: rolesRes});
-});
-
 /* Manage User */
-router.post('/user', isAuthenticated, async (req, res, next) => {
-  const uRes = await user(req.body.inputUser, req.body.inputProfile, conn);
+router.get('/users', isAuthenticated, async function (req, res, next) {
+  if(!sess.roles) {
+    const roles = await sfUser.listRoles(conn);
+    sess.roles = [];
+  
+    roles.forEach(function(role){
+      sess.roles.push({id: role.Id, name: role.Name})
+    });  
+  }
+
+  res.render('users', { 
+    roles: sess.roles});
 });
 
-router.get('/profiles/list/users', (req, res, next) => {
+router.post('/users', isAuthenticated, async (req, res, next) => {
+  let status = 0, alertMsg;
+  const sfRes = await sfUser.updateUserRole(conn,req.body.inputUser, req.body.inputRole).catch(err => {
+   // console.log(JSON.stringify(err));
+    alertMsg = err;
+    status = -1;
+  });
+  if (sfRes && sfRes.success) {
+    alertMsg = 'Papel atualizado para ' + findValue(sess.roles, req.body.inputRole) + '.'; 
+    status = 1;
+  }
+  res.render('users', { 
+    roles: sess.roles,
+    status: status,
+    alertMsg: alertMsg
+  });
+});
+
+router.get('/users/list', (req, res, next) => {
   let users = [{id: '1', name: 'Diego'}, {id: '2', name: 'João'}];
   if (sess.user) {
     users.unshift({id: sess.user.user_id, name: sess.user.display_name})
@@ -65,11 +82,21 @@ router.get('/profiles/list/users', (req, res, next) => {
   });
 });
 
-router.get('/test', (req, res, next) => {
-  res.render('profile', { 
-    title: 'Express', 
-    users: [{id: '1', name: 'Diego'}, {id: '2', name: 'João'}],
-    profiles: [{id: '1', name: 'Atendente'}, {id: '2', name: 'Gerente'}] });
+router.get('/metadata', (req, res, next) => {
+  res.render('metadata');
+});
+
+router.get('/metadata/describe', isAuthenticated, async (req, res, next) => {
+  if (!sess.metadata) {
+    sess.metadata = [];
+    await conn.metadata.describe('46.0', function(err, metadata) {
+      if (err) { return console.error('err', err); }
+      metadata.metadataObjects.forEach(function(item){
+        sess.metadata.push({name: item.xmlName});
+      });  
+    });
+  }
+  res.render('metadata', {html: JSON.stringify(sess.metadata, undefined, 2), metaList: sess.metadata});
 });
 
 /* GET login page. */
@@ -78,9 +105,7 @@ router.get('/login', function(req, res, next) {
   if (!sess.accessToken) {
     res.render('login', { error: false, logged: sess.accessToken ? true : false});
   } else {
-    res.render('index', { 
-      users: [{id: '1', name: 'Diego'}, {id: '2', name: 'João'}],
-      profiles: [{id: '1', name: 'Atendente'}, {id: '2', name: 'Gerente'}] });
+    res.render('index');
   }
 });
 
@@ -123,5 +148,9 @@ router.get('/oauth2/callback', function(req, res) {
     res.render('success');
   });
 });
+
+function findValue(arr, id) {
+    return arr.find( x => x.id === id).name;
+}
 
 export default router;

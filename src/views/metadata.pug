@@ -9,13 +9,33 @@ block nav
 block content
 
     .container.theme-showcase(role='main')
-        .py-5.text-center
+        .pt-5.pb-3.text-center
             //-img.d-block.mx-auto.mb-4(src='/images/logo_a.png' alt='' width='72' height='72')
-            h2 Checkout form
+            h2 Metadata Types
             p.lead
-                | Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.
+                | Metadata API enables you to access some entities and feature settings that you can customize in the user interface.
+
+            .alert.text-left.alert-warning.d-flex.align-items-top.mt-4.pt-4(role='alert')
+                +icon('sticky-note')(color="#856404")(size="2em")
+                p
+                    ul
+                        li Metadata type names are case-sensitive. Specifying a type name with an invalid case results in a deployment error.
+                        li Metadata types don’t always correspond directly to their related data types. In some cases, the information is accessible but not organized as expected. For example, dependent picklists are exposed as a type of picklist, not a separate metadata type.
+                        li The wildcard character doesn’t apply to metadata types for feature settings, like AccountSettings. The wildcard applies only when retrieving all settings and not an individual setting. 
+
         .row
             .col-md-12.order-md-1
+                .row
+                    .col-md-6.mb-3
+                        //- input metadata 
+                        label(for="inputMetadata") Metadata
+                        select(name="inputMetadata" id="selectMetadata" class="form-control mr-2" required autofocus)
+                            each meta in metaList
+                                option(value=meta.name) #{meta.name}
+                h4.mb-3 JSON
+                pre 
+                    code #{html}
+
                 h4.mb-3 Billing address
                 form.needs-validation(novalidate='')
                     .row
@@ -118,12 +138,6 @@ block content
                                 | Security code required
                     hr.mb-4
                     button.btn.btn-primary.btn-lg.btn-block(type='submit') Continue to checkout
-        footer.my-5.pt-5.text-muted.text-center.text-small
-            p.mb-1 © 2017-2019 Company Name
-            ul.list-inline
-                li.list-inline-item
-                    a(href='#') Privacy
-                li.list-inline-item
-                    a(href='#') Terms
-                li.list-inline-item
-                    a(href='#') Support
+
+block scripts
+    script(src='../javascripts/inputs.js')

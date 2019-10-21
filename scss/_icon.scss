@@ -2,7 +2,15 @@ i.fas {
     transition: all 6000ms;
     transition-timing: ease-in-out;
     
-    .icon-wrapper:hover & {
+    .icon-rotate:hover & {
         transform: rotate(1080deg);
     }
-  }
+}
+
+div.alert {
+    i.fas {
+        margin-right: 5px;
+        transition: none;
+    }
+}
+

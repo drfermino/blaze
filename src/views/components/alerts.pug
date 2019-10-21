@@ -25,7 +25,10 @@ mixin alert-x(type,message)
 //- Generic alert with icon and close button
 mixin alert-ix(type,message,icon)
 	.alert.alert-dismissible(role="alert",class=`alert-${type}`)
-		+icon(icon)
+		if attributes.color
+			+icon(icon)(color=attributes.color)
+		else
+			+icon(icon)
 		button.close(type="button",data-dismiss="alert" aria-label="Close")
 			span(aria-hidden="true")  &times;
 		= message
@@ -114,24 +117,24 @@ mixin alert-x-danger(message)
 //- Alert info
 mixin alert-ix-info(message,icon)
 	unless icon
-		- var icon = "info-sign"
-	+alert-ix("info",message,icon)
+		- var icon = "info-circle"
+	+alert-ix("info",message,icon)(color='#721c24')
 
 	
 //- Alert success
 mixin alert-ix-success(message,icon)
 	unless icon
-		- var icon = "ok-sign"
-	+alert-ix("success",message,icon)
+		- var icon = "check-circle"
+	+alert-ix("success",message,icon)(color='#155724')
 
 //- Alert warning		
 mixin alert-ix-warning(message,icon)
 	unless icon
-		- var icon = "exclamation-sign"
-	+alert-ix("warning",message,icon)
+		- var icon = "exclamation-circle"
+	+alert-ix("warning",message,icon)(color='#721c24')
 
 //- Alert danger		
 mixin alert-ix-danger(message,icon)
 	unless icon
-		- var icon = "remove-sign"
-	+alert-ix("danger",message,icon)
+		- var icon = "times-circle"
+	+alert-ix("danger",message,icon)(color='#721c24')

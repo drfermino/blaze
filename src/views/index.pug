@@ -16,7 +16,7 @@ block content
                 |Permissões de usuário e configurações de acesso são especificadas em perfis e conjuntos de permissões. Para usá-los efetivamente, entenda as diferenças entre os perfis e conjuntos de permissões.
         .row
             .col-md-12.order-md-1
-                form(method="POST" action="/user")
+                form(method="POST" action="/users")
                     #error
                         if error
                             p.text-danger #{errorMsg}
@@ -25,21 +25,8 @@ block content
 
                     .row
                         .col-md-6.mb-3
-                            //- input Usuário 
-                            label(for="inputUser") Usuário
-                            select(id="inputUser" class="form-control top-item" required autofocus)
-                                each user in users
-                                    option(value=user.id) #{user.name}
-                        .col-md-6.mb-3
-                            //- input Perfil 
-                            label(for="inputProfile") Perfil
-                            select(id="inputProfile" class="form-control bottom-item" required autofocus)
-                                each profile in profiles
-                                    option(value=profile.id) #{profile.name}
                     
                     .mb-3
                         //- signIn button
                         - var buttonClass=['btn', 'btn-lg', 'btn-primary', 'btn-block'];
                         button(class=buttonClass type="submit") Atualizar
-                    - var pClasses=['mt-5', 'mb-3', 'text-muted'];
-                    p(class=pClasses) © 2019

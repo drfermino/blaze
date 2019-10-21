@@ -6,10 +6,10 @@
     "start": "npm run prod",
     "server": "babel-node ./src/bin/www",
     "server:prod": "node ./dist/bin/www",
-    "dev": "NODE_ENV=development npm-run-all server",
+    "dev": "cross-env NODE_ENV=development npm-run-all server",
     "clear": "rimraf dist",
     "build": "babel ./src --out-dir dist",
-    "prod": "NODE_ENV=production npm-run-all clear build server:prod",
+    "prod": "cross-env NODE_ENV=production npm-run-all clear build server:prod",
     "build-css": "node-sass --include-path scss scss/main.scss   public/css/style.css",
     "watch-css": "nodemon -e scss -x \"npm run build-css\"",
     "watch": "nodemon"
@@ -32,7 +32,9 @@
     "@babel/core": "^7.6.4",
     "@babel/node": "^7.6.3",
     "@babel/preset-env": "^7.6.3",
-    "nodemon": "^1.19.3",
-    "node-sass": "^4.12.0"
+    "cross-env": "^6.0.3",
+    "json-pretty-html": "^1.1.6",
+    "node-sass": "^4.12.0",
+    "nodemon": "^1.19.3"
   }
 }

@@ -1,17 +1,16 @@
 import jsforce from 'jsforce';
 
 const user = {
-  async updateUserProfile (userId,profileId,conn) {
+  updateUserRole (conn,userId,roleId) {
     try {
-      return await conn.sobject("Account").update({ 
-        Id : '0010x00000bOQ5IAAW',
-        Site : 'Updated Account #1'
+      return conn.sobject("User").update({ 
+        Id : userId,
+        UserRoleId : roleId
       }, function(err, ret) {
-      if (err || !ret.success) { return console.error(err, ret); }
-        console.log('Updated Successfully : ' + ret.id);
+        if (err || !ret.success) { return err; }
       });
     } catch (e) {
-        return {err: e};
+        return {e};
     } 
   },
 
@@ -25,20 +24,21 @@ const user = {
         console.log('Updated Successfully : ' + ret.id);
       });
     } catch (e) {
-        return {err: e};
+        return {e};
     } 
   },
 
-  async listRoles (conn) {
+  listRoles (conn) {
     try {
-      let response;
-      await conn.query("SELECT Id, Name FROM UserRole", function(err, result) {
+//      let response;
+      return conn.query("SELECT Id, Name FROM UserRole", function(err, result) {
         if (err) { return err; }
-        response = result.records;
+//        return response = result.records;
+        return result.records;
       }); 
-      return response; 
+//      return response; 
     } catch (e) {
-      return {err: e};
+      return {e};
     } 
   }
 }

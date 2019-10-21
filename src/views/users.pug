@@ -11,41 +11,43 @@ block content
 
         .py-5.text-center
             //-img.d-block.mx-auto.mb-4(src='/images/logo_a.png' alt='' width='72' height='72')
+            +icon('user-tag')(color="#28A745", size="3em")
             h2 Papéis
             p.lead
                 |Permissões de usuário e configurações de acesso são especificadas em perfis e conjuntos de permissões. Para usá-los efetivamente, entenda as diferenças entre os perfis e conjuntos de permissões.
         .row
             .col-md-12.order-md-1
-                form(method="POST" action="/user")
+                form(method="POST" action="/users")
+                    h3.mb-3.font-weight-normal Alteração de papel
                     #error
-                        if error
-                            p.text-danger #{errorMsg}
-                    - var h1Classes = ['h3', 'mb-3', 'font-weight-normal']
-                    h1(class=h1Classes) Alteração de papel
+                        if status === -1
+                            +alert-ix-danger(alertMsg)
+                    #success
+                        if status === 1
+                            +alert-ix-success(alertMsg)
 
                     .row
                         .col-md-6.mb-3
                             //- input Usuário 
                             label(for="inputUser") Usuário
                             .d-flex.justify-content-between.align-items-center
-                                select(id="inputUser" class="form-control mr-2" required autofocus)
+                                select(name="inputUser" id="selecUser" class="form-control mr-2" required autofocus)
                                     if session.user
                                         option(value=session.user.user_id) #{session.user.display_name}
-                                +icon('sync-alt')(id="tst", color="#28A745", size="1.1em")
+                                +icon('sync-alt')(id="tst", color="#28A745", size="1.1em", trans="rotate")
 
                         .col-md-6.mb-3
                             //- input Perfil 
                             label(for="inputRole") Papel
-                            select(id="inputRole" class="form-control bottom-item" required autofocus)
+                            select(name="inputRole" id="selectRole" class="form-control mr-2" required autofocus)
                                 each role in roles
                                     option(value=role.id) #{role.name}
                     
                     .mb-3
                         //- signIn button
-                        - var buttonClass=['btn', 'btn-lg', 'btn-primary', 'btn-block'];
-                        button(class=buttonClass type="submit") Atualizar
-                    - var pClasses=['mt-5', 'mb-3', 'text-muted'];
-                    p(class=pClasses) © 2019
+                        button.btn.btn-primary.btn-lg.btn-block.btn-loading(type="submit") Alterar
 
 block scripts
     script(src='../javascripts/ajax.js')
+    script(src='../javascripts/buttons.js')
+    script(src='../javascripts/inputs.js')
