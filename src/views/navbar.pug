@@ -1,31 +1,32 @@
 mixin navbar(active)
     // Fixed navbar
     nav.navbar.navbar-expand-lg.navbar-light.bg-light.sticky-top
-        a.navbar-brand(href='#')
-            img.d-inline-block.align-top(src='/images/logo_c.png', width='30', height='30', alt='')
-            span.align-top  blaze
-        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
-            span.navbar-toggler-icon
-        #navbarSupportedContent.collapse.navbar-collapse
-            ul.navbar-nav.mr-auto
-                li.nav-item(class=active === "home" ? "active" : "")
-                    a.nav-link(href='/')
-                        | Home 
-                        span.sr-only (current)
-                li.nav-item(class=active === "checkout" ? "active" : "")
-                    a.nav-link(href='/metadata/describe')  Metadata
-                li.nav-item.dropdown(class=active === "user" ? "active" : "")
-                    a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-                        | Usuário
-                    .dropdown-menu(aria-labelledby='navbarDropdown')
-                        a.dropdown-item(href='/users') Trocar papel
-                        //-a.dropdown-item(href='#') Another action
-                        //-.dropdown-divider
-                        //-a.dropdown-item(href='#') Something else here
-                li.nav-item
-                    //-a.nav-link.disabled(href='#') Disabled
-            form.form-inline.my-2.my-lg-0
-                if session.user
-                    a.nav-link.disabled(href='#') #{session.user.username}
-                input.form-control.mr-sm-2(type='search', placeholder='Buscar', aria-label='Buscar')
-                button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Buscar
+        .container
+            a.navbar-brand(href='#')
+                img.d-inline-block.align-top(src='/images/logo_c.png', width='30', height='30', alt='')
+                span.align-top  blaze
+            button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+            #navbarSupportedContent.collapse.navbar-collapse
+                ul.navbar-nav.mr-auto
+                    li.nav-item(class=active === "home" ? "active" : "")
+                        a.nav-link(href='/')
+                            | Home 
+                            span.sr-only (current)
+                    li.nav-item(class=active === "checkout" ? "active" : "")
+                        a.nav-link(href='/metadata/describe')  Metadata
+                    li.nav-item.dropdown(class=active === "user" ? "active" : "")
+                        a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                            | Usuário
+                        .dropdown-menu(aria-labelledby='navbarDropdown')
+                            a.dropdown-item(href='/users') Trocar papel
+                            //-a.dropdown-item(href='#') Another action
+                            //-.dropdown-divider
+                            //-a.dropdown-item(href='#') Something else here
+                    li.nav-item
+                        //-a.nav-link.disabled(href='#') Disabled
+                form.form-inline.my-2.my-lg-0
+                    if session.user
+                        a.nav-link.disabled(href='#') #{session.user.username}
+                    input.form-control.mr-sm-2(type='search', placeholder='Buscar', aria-label='Buscar')
+                    button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Buscar

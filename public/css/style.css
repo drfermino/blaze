@@ -1,5 +1,10 @@
 .navbar {
   box-shadow: 0 1px 0 rgba(12, 13, 14, 0.1), 0 1px 6px rgba(59, 64, 69, 0.1); }
+  .navbar .container {
+    max-width: 1264px;
+    width: 100%;
+    display: flex;
+    margin: 0 auto; }
 
 .nav-link.disabled {
   color: #cacaca; }
