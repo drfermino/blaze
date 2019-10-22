@@ -1,7 +1,8 @@
 extends template
 append styles
     // Custom styles for this template
-    // link(href='../css/theme.css' rel='stylesheet')
+    link(href='../css/JSONViewer.css' rel='stylesheet')
+    link(href='../css/jquery.jsonbrowser.css' rel='stylesheet')    
 
 block nav
   - var active = "checkout"
@@ -39,7 +40,11 @@ block content
                             button.btn.btn-outline-primary.mb-2.ml-2(type='button') Adicionar
 
                 h4.mb-3 JSON
-                pre(id='jsonCode')
+
+                #json
+                #browser.jsonbrowser
+
+                //-pre(id='jsonCode')
                     code #{html}
 
                 h4.mb-3 Billing address
@@ -145,7 +150,10 @@ block content
                     hr.mb-4
                     button.btn.btn-primary.btn-lg.btn-block(type='submit') Continue to checkout
 
-block scripts
-    script(src='../javascripts/inputs.js')
-    script(src='../javascripts/buttons.js')
-    script(src='../javascripts/ajax.js')    
+append scripts
+    script(src='../js/jquery.jsonbrowser.min.js')
+    script(src='../js/JSONViewer.js')
+    script(src='../js/inputs.js')
+    script(src='../js/buttons.js')
+    script(src='../js/ajax.js')
+    //script(src='../js/json-viewer.js')   

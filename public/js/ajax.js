@@ -1,6 +1,14 @@
-$('#tst').on('click', function(e) {
-    e.preventDefault();
+const jsonViewer = new JSONViewer();
+document.querySelector("#json").appendChild(jsonViewer.getContainer());
+jsonViewer.showJSON({json: "example"}, null, 0);
 
+var myJSON = [{jurema: 'oi'}]
+$('#browser').jsonbrowser(myJSON);
+
+
+$('#btn-list-users').on('click', function(e) {
+    e.preventDefault();
+    var target = $(this);
     $.ajax({
         url: '/users/list',
         method: 'GET'
@@ -19,10 +27,13 @@ $('#tst').on('click', function(e) {
         } else {
             console.log('error...ajax');
         }
+        target.resetButton();
     });
 });
 
 $('#btn-search-meta').on('click', function(e) {
+    var jsonObj = {};
+    
     e.preventDefault();
     var target = $(this);
 
@@ -35,28 +46,24 @@ $('#btn-search-meta').on('click', function(e) {
         console.log(res.success);        
         if (res.success) {
             if (res.html) {
-                $('#jsonCode').html(res.html);
+                //$('#jsonCode').html(res.html);
+                jsonObj = JSON.parse(res.html);
+                jsonViewer.showJSON(jsonObj, null, 0);
+                $('#browser').jsonbrowser(res.html);
             }
         } else {
             console.log('error...ajax');
         }
-
         target.resetButton();
-
-/*        $('#btn-search-meta').html($('#btn-search-meta').attr('data-html'));
-        $('#btn-search-meta').prop('disabled', false);
-        $('#btn-search-meta').removeAttr('data-html');*/
     });
-
-    // redirect
-   // window.location.href = "/metadata/describe/" + $("#selectMetadata").val();
 });
 
 (function( $ ){
     $.fn.resetButton = function() {
-        this.hide().html(this.attr('data-html')).fadeIn(1500);
+        this.animate({width: this.attr('data-width')}, 300).html(this.attr('data-html'));
         this.prop('disabled', false);
         this.removeAttr('data-html');
+        this.removeAttr('data-width');
         return this;
     }; 
  })( jQuery );

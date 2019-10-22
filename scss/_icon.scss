@@ -1,9 +1,17 @@
 i.fas {
-    transition: all 6000ms;
+    transition-property: transform;
+    transition-duration:  6000ms;
     transition-timing: ease-in-out;
     
     .icon-rotate:hover & {
         transform: rotate(1080deg);
+    }
+}
+
+button.btn-outline-success:hover {
+    .icon-rotate  {
+        color: white !important;
+        transform: rotate(1080deg) !important;
     }
 }
 

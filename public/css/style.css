@@ -22,10 +22,15 @@
   font-weight: bold; }
 
 i.fas {
-  transition: all 6000ms;
+  transition-property: transform;
+  transition-duration: 6000ms;
   transition-timing: ease-in-out; }
   .icon-rotate:hover i.fas {
     transform: rotate(1080deg); }
+
+button.btn-outline-success:hover .icon-rotate {
+  color: white !important;
+  transform: rotate(1080deg) !important; }
 
 div.alert i.fas {
   margin-right: 5px;

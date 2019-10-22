@@ -9,9 +9,9 @@ block nav
 block content
     .container.theme-showcase(role='main')
 
-        .py-5.text-center
+        .pt-5.pb-3.text-left
             //-img.d-block.mx-auto.mb-4(src='/images/logo_a.png' alt='' width='72' height='72')
-            +icon('user-tag')(color="#28A745", size="3em")
+            //-+icon('user-tag')(color="#28A745", size="3em")
             h2 Papéis
             p.lead
                 |Permissões de usuário e configurações de acesso são especificadas em perfis e conjuntos de permissões. Para usá-los efetivamente, entenda as diferenças entre os perfis e conjuntos de permissões.
@@ -26,28 +26,29 @@ block content
                         if status === 1
                             +alert-ix-success(alertMsg)
 
-                    .row
-                        .col-md-6.mb-3
+                    .row.align-items-end
+                        .col-md-4.mb-3
                             //- input Usuário 
                             label(for="inputUser") Usuário
                             .d-flex.justify-content-between.align-items-center
                                 select(name="inputUser" id="selecUser" class="form-control mr-2" required autofocus)
                                     if session.user
                                         option(value=session.user.user_id) #{session.user.display_name}
-                                +icon('sync-alt')(id="tst", color="#28A745", size="1.1em", trans="rotate")
+                                button.btn.btn-outline-success(id="btn-list-users", type="button") 
+                                    +icon('sync-alt')(color="#28A745", size="1.1em", trans="rotate")
 
-                        .col-md-6.mb-3
+                        .col-md-4.mb-3
                             //- input Perfil 
                             label(for="inputRole") Papel
                             select(name="inputRole" id="selectRole" class="form-control mr-2" required autofocus)
                                 each role in roles
                                     option(value=role.id) #{role.name}
                     
-                    .mb-3
-                        //- signIn button
-                        button.btn.btn-primary.btn-lg.btn-block.btn-loading(type="submit") Alterar
+                        .col-md-4.mb-3.ml-n3
+                            //- signIn button
+                            button.btn.btn-primary.btn-loading-submit(type="submit") Alterar
 
 block scripts
-    script(src='../javascripts/ajax.js')
-    script(src='../javascripts/buttons.js')
-    script(src='../javascripts/inputs.js')
+    script(src='../js/ajax.js')
+    script(src='../js/buttons.js')
+    script(src='../js/inputs.js')
