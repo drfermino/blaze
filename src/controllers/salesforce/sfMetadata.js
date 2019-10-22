@@ -17,12 +17,7 @@ const metadata = {
   describeMetadata (conn) {
     try {
         return conn.metadata.describe('46.0', function(err, metadata) {
-            if (err) { return console.error('err', err); }
-            /*let mdt = metadata;
-            metadata = [];
-            mdt.metadataObjects.forEach(function(item){
-                metadata.push({name: item.xmlName});
-            });*/
+          if (err) { return console.error('err', err); }
         });
     } catch (e) {
       return {e};

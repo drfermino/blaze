@@ -41,8 +41,13 @@ block content
 
                 h4.mb-3 JSON
 
-                #json
+                .btn-group.mb-3(role='group', aria-label='Button group with nested dropdown')
+                    button.btn.btn-light(onclick='$.jsonbrowser.expandAll(`#browser`)') Expand all
+                    button.btn.btn-light(onclick='$.jsonbrowser.collapseAll(`#browser`)') Collapse all
+
                 #browser.jsonbrowser
+                #json
+
 
                 //-pre(id='jsonCode')
                     code #{html}
@@ -151,7 +156,7 @@ block content
                     button.btn.btn-primary.btn-lg.btn-block(type='submit') Continue to checkout
 
 append scripts
-    script(src='../js/jquery.jsonbrowser.min.js')
+    script(src='../js/jquery.jsonbrowser.js')
     script(src='../js/JSONViewer.js')
     script(src='../js/inputs.js')
     script(src='../js/buttons.js')

@@ -1,4 +1,9 @@
-
+.jsonbrowser {
+  background-color: #f8f9fa;
+  padding: 10px 10px 10px 20px;
+  border-radius: 0.4em;
+  width: 710px;
+}
 .jsonbrowser ul {
   margin : 0;
   padding : 0;

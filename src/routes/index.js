@@ -96,15 +96,19 @@ router.get('/metadata/describe', isAuthenticated, async (req, res, next) => {
 router.get('/metadata/describe/:mdt', isAuthenticated, async (req, res, next) => {
   const meta = req.params.mdt;
   if (!sess.metadata[meta]) {
-    sess.metadata[meta] = await sfMetadata.listMetadata(conn, req.params.mdt);
-  }
+    const metaList = await sfMetadata.listMetadata(conn, req.params.mdt);
+    sess.metadata[meta] = {};
 
+    metaList.forEach(function(metaItem){
+      var keyName = metaItem.fullName;
+      sess.metadata[meta][keyName] = metaItem;
+    });  
+    
+  }
   res.json({  
     success: true,
     html: JSON.stringify(sess.metadata[meta], undefined, 2)
   });
-
- //res.render('metadata', {html: JSON.stringify(sess.metadata[meta], undefined, 2), metaList: sess.metadata.metadataObjects});
 });
 
 /* GET login page. */
