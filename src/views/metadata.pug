@@ -41,13 +41,18 @@ block content
 
                 h4.mb-3 JSON
 
-                .btn-group.mb-3(role='group', aria-label='Button group with nested dropdown')
-                    button.btn.btn-light(onclick='$.jsonbrowser.expandAll(`#browser`)') Expand all
-                    button.btn.btn-light(onclick='$.jsonbrowser.collapseAll(`#browser`)') Collapse all
+                .form-inline
+                    .btn-group.mb-3(role='group', aria-label='Button group with nested dropdown')
+                        button#expand-all.btn.btn-light.border.border-secondary Expand all
+                        button#collapse-all.btn.btn-light.border.border-secondary Collapse all
+
+                    .ps-relative
+                        input#search-metadata.form-control.mb-3.ml-3(type='text' placeholder='Filter by metadata name' style="padding-left: 2rem")
+                        +icon-n("search")(color='#ced4da', trans='search')
+
 
                 #browser.jsonbrowser
                 #json
-
 
                 //-pre(id='jsonCode')
                     code #{html}

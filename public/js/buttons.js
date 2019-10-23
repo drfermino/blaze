@@ -1,13 +1,32 @@
+var myJSON = [{json: "example"}]
+$('#browser').jsonbrowser(myJSON);
 
 $(".btn-loading").on("click", function() { 
     $(this).loading(); 
 });
 
-
 $(".btn-loading-submit").on("click", function() { 
     $(this).loading();
     $(this).parents('form:first').submit();    
 });
+
+$('#collapse-all').on('click', function(e) {
+    e.preventDefault();
+    $.jsonbrowser.collapseAll('#browser');
+});
+
+$('#expand-all').on('click', function(e) {
+    e.preventDefault();
+    $.jsonbrowser.expandAll('#browser');
+});
+
+$('#search-metadata').on('keyup', function(e) {
+    e.preventDefault();
+    $.jsonbrowser.search('#browser', $(this).val());
+});
+$('#search-metadata').focus().trigger('keyUp');
+
+
 
 (function( $ ){
     $.fn.loading = function() {

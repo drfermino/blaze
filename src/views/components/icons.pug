@@ -25,3 +25,26 @@ mixin icon(name)
 				i.fas(class=`fa-${name}`)
 		else
 			i.fas(class=`fa-${name}`)
+
+//- Awesome
+mixin icon-n(name)
+	- var hasStyle = attributes.size || attributes.color
+	- var hasAttrs = attributes.id || attributes.trans || hasStyle
+	- var attrs = {}
+	if hasStyle
+		- attrs.style = {}
+		if attributes.size
+			- attrs.style['font-size'] = attributes.size
+		if attributes.color
+			- attrs.style['color'] = attributes.color
+		else
+			- attrs.style['color'] = '#721c24'
+	if attributes.trans
+		- attrs.class = `icon-${attributes.trans}`
+	if attributes.id
+		- attrs.id = attributes.id
+	if hasAttrs
+		span&attributes(attrs)
+			i.fas(class=`fa-${name}`)
+	else
+		i.fas(class=`fa-${name}`)

@@ -30,7 +30,17 @@ block content
                     a.btn.btn-danger.btn-lg.btn-block.connect(href='#', role='button') Conectar
             else
                     p.text-danger #{logged} 
-            - var pClasses=['mt-5', 'mb-3', 'text-muted'];
-            p(class=pClasses) © 2019
+            footer.my-5.text-muted.text-center.text-small
+                p.mb-1 © 2019 Blaze
+                ul.list-inline
+                    li.list-inline-item
+                        a(href='#') Privacy
+                    li.list-inline-item
+                        a(href='#') Terms
+                    li.list-inline-item
+                        a(href='#') Support
+            
+block footer
+
 block scripts            
     script(src='../js/popup.js')

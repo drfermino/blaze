@@ -2,10 +2,6 @@ const jsonViewer = new JSONViewer();
 document.querySelector("#json").appendChild(jsonViewer.getContainer());
 jsonViewer.showJSON({json: "example"}, null, 0);
 
-var myJSON = [{jurema: 'oi'}]
-$('#browser').jsonbrowser(myJSON);
-
-
 $('#btn-list-users').on('click', function(e) {
     e.preventDefault();
     var target = $(this);

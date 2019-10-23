@@ -7,3 +7,11 @@ html {
 body {
   height: 100%;
 }
+
+::placeholder { 
+  opacity: .5; /* Firefox */
+}
+
+.ps-relative {
+  position: relative;
+}

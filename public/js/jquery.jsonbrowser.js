@@ -14,11 +14,13 @@ $.jsonbrowser = {
     collapseAll: function(container) {
         var $container = $(container);
         $container.find('.' + this.collapsibleClass + ' > ul').addClass(this.collapsedClass);
+        $container.find('.' + this.collapsibleClass).addClass(this.collapsedClass);        
     },
     
     expandAll: function(container) {
         var $container = $(container);
         $container.find('.' + this.collapsibleClass + ' > ul').removeClass(this.collapsedClass);
+        $container.find('.' + this.collapsibleClass).removeClass(this.collapsedClass);        
     },
     
     showAll: function(container) {
@@ -129,10 +131,12 @@ $.fn.jsonbrowser = function(json, userOptions) {
                         $li.addClass($.jsonbrowser.collapsibleClass);
                         $li.on('click', '> .key', function() {
                             $(this).parent().children('ul').toggleClass($.jsonbrowser.collapsedClass);
+                            $(this).parent().toggleClass($.jsonbrowser.collapsedClass);
                         });
                         
                         if (options.collapsed) {
                             $li.children('ul').addClass($.jsonbrowser.collapsedClass);
+                            $li.addClass($.jsonbrowser.collapsedClass);
                         }
                     }
                 }

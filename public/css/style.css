@@ -36,6 +36,13 @@ div.alert i.fas {
   margin-right: 5px;
   transition: none; }
 
+.icon-search {
+  position: absolute;
+  left: 1.6em;
+  top: 50%;
+  margin-top: -1.2em;
+  pointer-events: none; }
+
 .sign-in {
   background-color: #f5f5f5;
   height: 100%; }
@@ -81,3 +88,10 @@ html {
 
 body {
   height: 100%; }
+
+::placeholder {
+  opacity: .5;
+  /* Firefox */ }
+
+.ps-relative {
+  position: relative; }
