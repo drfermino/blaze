@@ -1,6 +1,6 @@
-const jsonViewer = new JSONViewer();
+/*const jsonViewer = new JSONViewer();
 document.querySelector("#json").appendChild(jsonViewer.getContainer());
-jsonViewer.showJSON({json: "example"}, null, 0);
+jsonViewer.showJSON({json: "example"}, null, 0);*/
 
 $('#btn-list-users').on('click', function(e) {
     e.preventDefault();
@@ -43,8 +43,8 @@ $('#btn-search-meta').on('click', function(e) {
         if (res.success) {
             if (res.html) {
                 //$('#jsonCode').html(res.html);
-                jsonObj = JSON.parse(res.html);
-                jsonViewer.showJSON(jsonObj, null, 0);
+                //jsonObj = JSON.parse(res.html);
+                //jsonViewer.showJSON(jsonObj, null, 0);
                 $('#browser').jsonbrowser(res.html);
             }
         } else {

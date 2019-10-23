@@ -38,9 +38,16 @@ div.alert i.fas {
 
 .icon-search {
   position: absolute;
-  left: 1.6em;
+  left: 1.7em;
   top: 50%;
-  margin-top: -1.2em;
+  margin-top: -1.25em;
+  pointer-events: none; }
+
+.icon-search-n {
+  position: absolute;
+  left: .7em;
+  top: 50%;
+  margin-top: -.70em;
   pointer-events: none; }
 
 .sign-in {
@@ -87,7 +94,8 @@ html {
   height: 100%; }
 
 body {
-  height: 100%; }
+  height: 100%;
+  font-size: 90%; }
 
 ::placeholder {
   opacity: .5;

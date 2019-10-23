@@ -2,7 +2,6 @@ extends template
 
 append styles
     // Custom styles for this template
-    //link(href='../css/theme.css' rel='stylesheet')
 block nav
   - var active = "user"
 
@@ -48,7 +47,7 @@ block content
                             //- signIn button
                             button.btn.btn-primary.btn-loading-submit(type="submit") Alterar
 
-block scripts
+append scripts
     script(src='../js/ajax.js')
     script(src='../js/buttons.js')
     script(src='../js/inputs.js')

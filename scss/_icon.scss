@@ -24,8 +24,16 @@ div.alert {
 
 .icon-search {
     position: absolute;
-    left: 1.6em;
+    left: 1.7em;
     top: 50%;
-    margin-top: -1.2em;
+    margin-top: -1.25em;
+    pointer-events: none;
+}
+
+.icon-search-n {
+    position: absolute;
+    left: .7em;
+    top: 50%;
+    margin-top: -.70em;
     pointer-events: none;
 }

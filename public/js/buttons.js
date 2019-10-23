@@ -1,5 +1,5 @@
-var myJSON = [{json: "example"}]
-$('#browser').jsonbrowser(myJSON);
+/*var myJSON = [{json: "example"}]
+$('#browser').jsonbrowser(myJSON);*/
 
 $(".btn-loading").on("click", function() { 
     $(this).loading(); 
@@ -24,7 +24,7 @@ $('#search-metadata').on('keyup', function(e) {
     e.preventDefault();
     $.jsonbrowser.search('#browser', $(this).val());
 });
-$('#search-metadata').focus().trigger('keyUp');
+//$('#search-metadata').focus().trigger('keyUp');
 
 
 
@@ -36,7 +36,6 @@ $('#search-metadata').focus().trigger('keyUp');
         this.attr("data-html", this.html());
         this.attr("data-width", this.width() * 2.625);
         this.removeAttr('style');
-
 
         // add spinner to button
         this.html(

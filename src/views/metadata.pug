@@ -47,7 +47,7 @@ block content
                         button#collapse-all.btn.btn-light.border.border-secondary Collapse all
 
                     .ps-relative
-                        input#search-metadata.form-control.mb-3.ml-3(type='text' placeholder='Filter by metadata name' style="padding-left: 2rem")
+                        input#search-metadata.form-control.mb-3.ml-3(type='text' placeholder='Filter by metadata name' style="padding-left: 2rem; width: 270px")
                         +icon-n("search")(color='#ced4da', trans='search')
 
 
@@ -57,8 +57,8 @@ block content
                 //-pre(id='jsonCode')
                     code #{html}
 
-                h4.mb-3 Billing address
-                form.needs-validation(novalidate='')
+                //-h4.mb-3 Billing address
+                //-form.needs-validation(novalidate='')
                     .row
                         .col-md-6.mb-3
                             label(for='firstName') First name

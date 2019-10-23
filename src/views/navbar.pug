@@ -28,5 +28,9 @@ mixin navbar(active)
                 form.form-inline.my-2.my-lg-0
                     if session.user
                         a.nav-link.disabled(href='#') #{session.user.username}
-                    input.form-control.mr-sm-2(type='search', placeholder='Buscar', aria-label='Buscar')
+                    //input.form-control.mr-sm-2(type='search', placeholder='Buscar', aria-label='Buscar', style="padding-left: 2rem; width: 270px")
+
+                    .ps-relative
+                        input.form-control.mr-sm-2(type='search', placeholder='Buscar', aria-label='Buscar', style="padding-left: 2rem; width: 270px")
+                        +icon-n("search")(color='#ced4da', trans='search-n')
                     button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Buscar
